@@ -1,0 +1,31 @@
+Lorsque vous exécutez npm run protractor, le fichier index.js est probablement le point d'entrée du script de test de Protractor. Le message indiquant que Protractor essaie d'accéder à l'URL http://10.0.5.2:57613/wd/hub est lié à la configuration du pilote WebDriver utilisé par Protractor pour interagir avec le navigateur.
+
+L'URL http://10.0.5.2:57613/wd/hub est l'URL du serveur Selenium WebDriver, également appelé Selenium Grid. Protractor utilise Selenium WebDriver pour communiquer avec le navigateur et effectuer des actions sur l'interface utilisateur lors de l'exécution des tests.
+
+La configuration du pilote WebDriver se trouve généralement dans le fichier protractor.conf.js. Dans ce fichier, la propriété seleniumAddress ou directConnect est utilisée pour spécifier l'URL du serveur Selenium WebDriver. Voici comment cela peut être configuré :
+
+Utilisation de seleniumAddress :
+
+javascript
+Copy code
+// protractor.conf.js
+exports.config = {
+  // ...
+  seleniumAddress: 'http://10.0.5.2:4444/wd/hub',
+  // ...
+};
+Dans cet exemple, Protractor utilisera le serveur Selenium WebDriver accessible à l'URL http://10.0.5.2:4444/wd/hub pour exécuter les tests.
+
+Utilisation de directConnect :
+
+javascript
+Copy code
+// protractor.conf.js
+exports.config = {
+  // ...
+  directConnect: true,
+  // ...
+};
+Avec directConnect: true, Protractor utilisera un pilote WebDriver directement sans utiliser le serveur Selenium WebDriver externe. Dans ce cas, Protractor utilisera ChromeDriver (ou le pilote WebDriver approprié) directement sur votre machine.
+
+L'URL spécifiée (http://10.0.5.2:57613/wd/hub dans votre cas) correspond à l'URL du serveur Selenium WebDriver qui gère les communications entre Protractor et le navigateur. Vous pouvez vérifier la configuration dans votre fichier protractor.conf.js pour voir quelle propriété est utilisée pour spécifier cette URL.
